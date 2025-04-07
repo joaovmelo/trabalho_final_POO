@@ -1,7 +1,7 @@
 public class Gerente extends Funcionario{
-    String dataIngressoCarreiraGerencia;
-    AgenciaBancaria agencia;
-    String possuiCursoGerencia;
+    private String dataIngressoCarreiraGerencia;
+    private AgenciaBancaria agencia;
+    private String possuiCursoGerencia;
 
     public String getDataIngressoCarreiraGerencia(){
         return this.dataIngressoCarreiraGerencia;

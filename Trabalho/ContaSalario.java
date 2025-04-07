@@ -1,6 +1,6 @@
 public class ContaSalario extends Conta{
-    double limSaque;
-    double limTransfer;
+    private double limSaque;
+    private double limTransfer;
 
     public void setLimSaque(double limSaque){
         this.limSaque = limSaque;

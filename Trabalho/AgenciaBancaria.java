@@ -1,8 +1,8 @@
 public class AgenciaBancaria {
-    int numAgencia;
-    String nomeAgencia;
-    String adressAgencia;
-    Gerente gerente;
+    private int numAgencia;
+    private String nomeAgencia;
+    private String adressAgencia;
+    private Gerente gerente;
 
     public void setNumAgencia(int numAgencia){
         this.numAgencia = numAgencia;
