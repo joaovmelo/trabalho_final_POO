@@ -1,38 +1,48 @@
-public class Funcionario extends Pessoa{
-    private int numCarteiraTrabalho;
+public class Funcionario extends Pessoa {
+    private int numeroCarteiraTrabalho;
     private String cargo;
-    private double salarioFuncionario;
-    private int anoIngressoEmpresa;
+    private double salarioBase;
+    private int anoIngresso;
 
-    public int getNumCarteiraTrabalho() {
-        return numCarteiraTrabalho;
+    public Funcionario(String cpf, int Rg, String nome, Endereco endereco, String estadoCivil, String escolaridade, String dataNascimento, String sexo, int numeroCarteiraTrabalho,
+                       String cargo, double salarioBase, int anoIngresso) {
+        super(cpf, Rg, nome, endereco, estadoCivil, escolaridade, dataNascimento, sexo);
+        this.numeroCarteiraTrabalho = numeroCarteiraTrabalho;
+        this.cargo = cargo;
+        this.salarioBase = salarioBase;
+        this.anoIngresso = anoIngresso;
     }
 
-    public void setNumCarteiraTrabalho(int numCarteiraTrabalho) {
-        this.numCarteiraTrabalho = numCarteiraTrabalho;
+    public double calcularSalario() {
+        int anosNaEmpresa = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR) - anoIngresso;
+        if(anosNaEmpresa > 15){
+            return  salarioBase * 1.10;
+        }else{
+            return salarioBase;
+        }
     }
-
-    public String getCargo() {
-        return cargo;
+    public void setNumeroCarteiraTrabalho(int numeroCarteiraTrabalho) {
+        this.numeroCarteiraTrabalho = numeroCarteiraTrabalho;
     }
-
+    public int getNumeroCarteiraTrabalho() {
+        return numeroCarteiraTrabalho;
+    }
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-
-    public double getSalarioFuncionario() {
-        return salarioFuncionario;
+    public String getCargo() {
+        return cargo;
     }
-
-    public void setSalarioFuncionario(double salarioFuncionario) {
-        this.salarioFuncionario = salarioFuncionario;
+    public void setSalarioBase(double salarioBase) {
+        this.salarioBase = salarioBase;
     }
-
-    public int getAnoIngressoEmpresa() {
-        return anoIngressoEmpresa;
+    public double getSalarioBase() {
+        return salarioBase;
     }
-
-    public void setAnoIngressoEmpresa(int anoIngressoEmpresa) {
-        this.anoIngressoEmpresa = anoIngressoEmpresa;
+    public int getAnoIngresso() {
+        return anoIngresso;
+    }
+    public void setAnoIngresso(int anoIngresso) {
+        this.anoIngresso = anoIngresso;
     }
 }

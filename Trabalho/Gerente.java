@@ -1,24 +1,39 @@
-public class Gerente extends Funcionario{
-    private String dataIngressoCarreiraGerencia;
-    private AgenciaBancaria agencia;
-    private String possuiCursoGerencia;
+import java.util.Date;
+//revisar essa classe
+public class Gerente extends Funcionario {
+    private static double comissaoPorAgencia = 1000.0;
+    private Date dataIngressoGerente;
+    private AgenciaBancaria agenciaGerenciada;
 
-    public String getDataIngressoCarreiraGerencia(){
-        return this.dataIngressoCarreiraGerencia;
+    public Gerente(String cpf, int Rg, String nome, Endereco endereco, String estadoCivil, String escolaridade, String dataNascimento, String sexo, int numeroCarteiraTrabalho,
+                   double salarioBase, int anoIngresso, AgenciaBancaria agenciaGerenciada) {
+        super(cpf, Rg, nome, endereco, estadoCivil, escolaridade, dataNascimento, sexo, numeroCarteiraTrabalho, "Gerente", salarioBase, anoIngresso);
+        this.agenciaGerenciada = agenciaGerenciada;
+        this.dataIngressoGerente = new Date();
     }
-    public AgenciaBancaria getAgenciaGerente(){
-        return this.agencia;
+
+    public static double getComissaoPorAgencia() {
+        return comissaoPorAgencia;
     }
-    public String getPossuiCursoGerencia(){
-        return this.possuiCursoGerencia;
+
+    public static void setComissaoPorAgencia(double comissao) {
+        comissaoPorAgencia = comissao;
     }
-    public void setDataIngressoCarreiraGerencia(String ingresso){
-        this.dataIngressoCarreiraGerencia = ingresso;
+    public void setDataIngressoGerente(Date dataIngressoGerente) {
+        this.dataIngressoGerente = dataIngressoGerente;
     }
-    public void setAgenciaGerente(AgenciaBancaria agencia){
-        this.agencia = agencia;
+    public Date getDataIngressoGerente() {
+        return dataIngressoGerente;
     }
-    public void setPossuiCursoGerencia(String possuiCurso){
-        this.possuiCursoGerencia = possuiCurso;
+    public void setAgenciaGerenciada(AgenciaBancaria agenciaGerenciada) {
+        this.agenciaGerenciada = agenciaGerenciada;
+    }
+    public AgenciaBancaria getAgenciaGerenciada() {
+        return agenciaGerenciada;
+    }
+
+    @Override
+    public double calcularSalario() {
+        return super.calcularSalario() + comissaoPorAgencia;
     }
 }

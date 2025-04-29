@@ -1,14 +1,31 @@
 public class AgenciaBancaria {
     private int numAgencia;
     private String nomeAgencia;
-    private String adressAgencia;
+    private Endereco enderecoAgencia;
     private Gerente gerente;
 
+    public AgenciaBancaria() {
+        this.numAgencia = 0;
+        this.nomeAgencia = "";
+        this.enderecoAgencia = null;
+        this.gerente = null;
+    }
+
+    public AgenciaBancaria(int numAgencia, String nomeAgencia, Endereco endereco, Gerente gerente){
+        this.numAgencia = numAgencia;
+        this.nomeAgencia = nomeAgencia;
+        this.enderecoAgencia = endereco;
+        this.gerente = gerente;
+    }
+    
+    public void setEnderecoAgencia(Endereco enderecoAgencia) {
+        this.enderecoAgencia = enderecoAgencia;
+    }
+    public Endereco getEnderecoAgencia() {
+        return enderecoAgencia;
+    }
     public void setNumAgencia(int numAgencia){
         this.numAgencia = numAgencia;
-    }
-    public void setAdressAgencia(String adressAgencia){
-        this.adressAgencia = adressAgencia;
     }
     public void setNomeAgencia(String nomeAgencia){
         this.nomeAgencia = nomeAgencia;
@@ -24,8 +41,5 @@ public class AgenciaBancaria {
     }
     public Gerente getGerente(){
         return this.gerente;
-    }
-    public String getAdressAgencia(){
-        return this.adressAgencia;
     }
 }

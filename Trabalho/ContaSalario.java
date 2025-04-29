@@ -1,4 +1,4 @@
-public class ContaSalario extends Conta{
+public class ContaSalario extends Conta {
     private double limSaque;
     private double limTransfer;
 
@@ -13,5 +13,10 @@ public class ContaSalario extends Conta{
     }
     public double getLimSaque(){
         return this.limSaque;
+    }
+
+    @Override
+    protected double getSaldoDisponivel() {
+        return getSaldo();
     }
 }

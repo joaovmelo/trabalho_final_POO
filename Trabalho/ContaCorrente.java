@@ -1,17 +1,22 @@
-public class ContaCorrente extends Conta{
-    private double limChequeEspecial;
+public class ContaCorrente extends Conta {
+    private double limiteChequeEspecial;
     private double valorTaxaAdm;
 
-    public void setLimChequeEspecial(double limChequeEspecial){
-        this.limChequeEspecial = limChequeEspecial;
+    public void setLimiteChequeEspecial(double limiteChequeEspecial) {
+        this.limiteChequeEspecial = limiteChequeEspecial;
     }
-    public void setValorTaxaAdm(double valorTaxa){
-        this.valorTaxaAdm = valorTaxa;
+    public double getLimiteChequeEspecial() {
+        return limiteChequeEspecial;
     }
-    public double getLimChequeEspecial(){
-        return this.limChequeEspecial;
+    public void setValorTaxaAdm(double valorTaxaAdm) {
+        this.valorTaxaAdm = valorTaxaAdm;
     }
-    public double getValorTaxaAdm(){
-        return this.valorTaxaAdm;
+    public double getValorTaxaAdm() {
+        return valorTaxaAdm;
+    }
+
+    @Override
+    protected double getSaldoDisponivel() {
+        return getSaldo() + limiteChequeEspecial;
     }
 }
