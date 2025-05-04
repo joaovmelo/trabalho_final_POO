@@ -1,16 +1,16 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Transacao {
     public enum TipoTransacao { SAQUE, DEPOSITO, CONSULTA_SALDO, PAGAMENTO }
     public enum CanalTransacao { INTERNET_BANKING, CAIXA_ELETRONICO, CAIXA_FISICO }
 
     private Conta conta;
-    private Date data;
+    private LocalDate data;
     private double valor;
     private TipoTransacao tipo;
     private CanalTransacao canal;
 
-    public Transacao(Conta conta, Date data, double valor, TipoTransacao tipo, CanalTransacao canal) {
+    public Transacao(Conta conta, LocalDate data, double valor, TipoTransacao tipo, CanalTransacao canal) {
         this.conta = conta;
         this.data = data;
         this.valor = valor;
@@ -24,11 +24,11 @@ public class Transacao {
     public void setConta(Conta conta) {
         this.conta = conta;
     }
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
-    public void setData(Date data) {
-        this.data = data;
+    public void setData() {
+        this.data = LocalDate.now();
     }
     public double getValor() {
         return valor;

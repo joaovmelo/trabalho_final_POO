@@ -1,25 +1,29 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 //revisar essa classe
 //ver o que é enum
 public abstract class Conta {
     private boolean estaAtiva;
     private int nroConta;
-    private String dataDeAbertura;
-    private String dataUltimaMovimentacao;
+    private LocalDate dataDeAbertura;
+    private LocalDate dataUltimaMovimentacao;
     private AgenciaBancaria agencia;
     private Cliente cliente;
     private double saldo;
     private String senha;
     private boolean isContaConjunta;
     private List<Transacao> transacoes = new ArrayList<>();
-
+    private List<Cliente> titulares = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
+    Random random = new Random();
     public Conta() {
         this.estaAtiva = false;
         this.nroConta = 0;
-        this.dataDeAbertura = "";
-        this.dataUltimaMovimentacao = "";
+        this.dataDeAbertura = null;
+        this.dataUltimaMovimentacao = null;
         this.agencia = null;
         this.cliente = null;
         this.saldo = 0.0;
@@ -27,11 +31,39 @@ public abstract class Conta {
         this.transacoes = new ArrayList<>();
         this.isContaConjunta = false;
     }
-
-    public void criacaoContaSolo(Cliente cliente, AgenciaBancaria agencia, boolean isContaConjunta){
-        setCliente(cliente);
+    public void criacaoContaSolo(Cliente cliente, AgenciaBancaria agencia, String senha){
         setAgencia(agencia);
-        
+        this.titulares.add(cliente);
+        setDataDeAbertura(LocalDate.now());
+        setNroConta(random.nextInt(999999));
+        setEstaAtiva(true);
+        setDataUltimaMovimentacao(null);
+        setSaldo(0.0);
+        setSenha(senha);
+        this.transacoes = new ArrayList<>();
+        setIsContaConjunta(false);
+    }
+    public void criacaoContaConjunta(Cliente cliente1, Cliente cliente2, AgenciaBancaria agencia, String senha){
+        setAgencia(agencia);
+        this.titulares.add(cliente1);
+        this.titulares.add(cliente2);
+        setDataDeAbertura(LocalDate.now());
+        setNroConta(random.nextInt(999999));
+        setEstaAtiva(true);
+        setDataUltimaMovimentacao(null);
+        setSaldo(0.0);
+        setSenha(senha);
+        this.transacoes = new ArrayList<>();
+        setIsContaConjunta(true);
+    }
+    void criacaoConta(Cliente cliente1, Cliente cliente2, AgenciaBancaria agencia, String senha, int tipoTitularidadeConta){
+        if(tipoTitularidadeConta == 1){
+            criacaoContaSolo(cliente1, agencia, senha);
+        }else if(tipoTitularidadeConta == 2){
+            criacaoContaConjunta(cliente1, cliente2, agencia, senha);
+        }else{
+            throw new IllegalArgumentException("Erro ao escolher titularidade da conta");
+        }
     }
 
     public void sacar(double valor, String senha) throws SaldoInsuficienteException {
@@ -66,7 +98,7 @@ public abstract class Conta {
     protected abstract double getSaldoDisponivel();
 
     private void registrarTransacao(double valor, Transacao.TipoTransacao tipo) {
-        transacoes.add(new Transacao(this, new Date(), valor, tipo, Transacao.CanalTransacao.INTERNET_BANKING));
+        transacoes.add(new Transacao(this, LocalDate.now(), valor, tipo, Transacao.CanalTransacao.INTERNET_BANKING));
     }
 
     public double getSaldo() { 
@@ -94,20 +126,20 @@ public abstract class Conta {
         this.nroConta = nroConta;
     }
 
-    public String getDataDeAbertura() {
+    public LocalDate getDataDeAbertura() {
         return dataDeAbertura;
     }
 
-    public void setDataDeAbertura(String dataDeAbertura) {
-        this.dataDeAbertura = dataDeAbertura;
+    public void setDataDeAbertura(LocalDate localDate) {
+        this.dataDeAbertura = localDate;
     }
 
-    public String getDataUltimaMovimentacao() {
+    public LocalDate getDataUltimaMovimentacao() {
         return dataUltimaMovimentacao;
     }
 
-    public void setDataUltimaMovimentacao(String dataUltimaMovimentacao) {
-        this.dataUltimaMovimentacao = dataUltimaMovimentacao;
+    public void setDataUltimaMovimentacao(LocalDate data) {
+        this.dataUltimaMovimentacao = data;
     }
 
     public AgenciaBancaria getAgencia() {
@@ -130,6 +162,12 @@ public abstract class Conta {
     }
     public void setIsContaConjunta(boolean isContaConjunta) {
         this.isContaConjunta = isContaConjunta;
+    }
+    public String getSenha() {
+        return senha;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 }

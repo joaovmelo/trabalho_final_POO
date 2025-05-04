@@ -11,6 +11,7 @@ public class Main{
         agencia1.setGerente(gerenteSantanderMG_UDI);
         agencia2.setGerente(gerenteSantanderSP);
         Cliente cliente = new Cliente();
-        cliente.cadastraCliente();
+        Cliente clientes = cliente.cadastraCliente();
+        //System.out.println(cliente.toString(clientes, clientes.getEndereco()));
     }
 }

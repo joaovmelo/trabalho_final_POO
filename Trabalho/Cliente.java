@@ -12,6 +12,7 @@ public class Cliente extends Pessoa {
     }
     public Cliente(String cpf, String nome, Endereco endereco, String estadoCivil, String escolaridade, String dataNascimento){
         super(cpf, nome,endereco, estadoCivil, escolaridade, dataNascimento);
+        this.contas = new ArrayList<>();
     }
     public Cliente() {
         super();
@@ -38,6 +39,14 @@ public class Cliente extends Pessoa {
         String dataNascimento = sc.nextLine();
         Cliente cliente = new Cliente(cpf, nome, endereco, estadoCivil, escolaridade, dataNascimento);
         return cliente;
+    }
+    public String toString(Cliente cliente, Endereco endereco){
+        return "Nome: " + cliente.getNome() + 
+        "\nCPF: " + validadacaoCPF.imprimeCPF(cliente.getCpf()) + 
+        "\nEstado Civil: " + cliente.getEstadoCivil() + 
+        "\nEscolaridade: " + cliente.getEscolaridade() + 
+        "\nEndereço: " + Endereco.getEndereco(endereco).getRua() + ", " + Endereco.getEndereco(endereco).getBairro() + ", " + Endereco.getEndereco(endereco).getCidade() + 
+        "\nData de nascimento: " + cliente.getDataNascimento();
     }
 
 }

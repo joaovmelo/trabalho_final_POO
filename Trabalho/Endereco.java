@@ -19,6 +19,9 @@ public class Endereco {
         Endereco endereco = new Endereco(rua, bairro, cidade);
         return endereco;
     }
+    public static Endereco getEndereco(Endereco endereco){
+        return endereco;
+    }
     public String getRua() { 
         return this.rua; 
     }

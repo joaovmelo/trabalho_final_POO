@@ -20,7 +20,7 @@ public abstract class Pessoa {
         this.escolaridade = escolaridade;
         this.dataNascimento = LocalDate.parse(dataNascimento, formatter);
         this.sexo = sexo;
-        if(validadacaoCPF.isCPF(cpf)){
+        if(!validadacaoCPF.isCPF(cpf)){
             throw new IllegalArgumentException("CPF não existe");
         }
     }
@@ -31,7 +31,7 @@ public abstract class Pessoa {
         this.estadoCivil = estadoCivil;
         this.escolaridade = escolaridade;
         this.dataNascimento = LocalDate.parse(dataNascimento, formatter);
-        if(validadacaoCPF.isCPF(cpf)){
+        if(!validadacaoCPF.isCPF(cpf)){
             throw new IllegalArgumentException("CPF não existe");
         }
     }
@@ -51,7 +51,7 @@ public abstract class Pessoa {
         return nome;
     }
     public Endereco getEndereco() {
-        return endereco;
+        return Endereco.getEndereco(endereco);
     }
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
