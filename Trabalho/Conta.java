@@ -3,9 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-//revisar essa classe
-//ver o que é enum
-public abstract class Conta {
+
+public abstract class Conta implements Imprimivel{
     private boolean estaAtiva;
     private int nroConta;
     private LocalDate dataDeAbertura;
@@ -17,8 +16,10 @@ public abstract class Conta {
     private boolean isContaConjunta;
     private List<Transacao> transacoes = new ArrayList<>();
     private List<Cliente> titulares = new ArrayList<>();
+
     Scanner sc = new Scanner(System.in);
     Random random = new Random();
+
     public Conta() {
         this.estaAtiva = false;
         this.nroConta = 0;
@@ -31,9 +32,10 @@ public abstract class Conta {
         this.transacoes = new ArrayList<>();
         this.isContaConjunta = false;
     }
-    public void criacaoContaSolo(Cliente cliente, AgenciaBancaria agencia, String senha){
+
+    public void criacaoContaSolo(List<Cliente> titulares, AgenciaBancaria agencia, String senha){
         setAgencia(agencia);
-        this.titulares.add(cliente);
+        this.titulares.add(titulares.get(0));
         setDataDeAbertura(LocalDate.now());
         setNroConta(random.nextInt(999999));
         setEstaAtiva(true);
@@ -43,10 +45,10 @@ public abstract class Conta {
         this.transacoes = new ArrayList<>();
         setIsContaConjunta(false);
     }
-    public void criacaoContaConjunta(Cliente cliente1, Cliente cliente2, AgenciaBancaria agencia, String senha){
+
+    public void criacaoContaConjunta(List<Cliente> titulares, AgenciaBancaria agencia, String senha){
         setAgencia(agencia);
-        this.titulares.add(cliente1);
-        this.titulares.add(cliente2);
+        this.titulares.addAll(titulares);
         setDataDeAbertura(LocalDate.now());
         setNroConta(random.nextInt(999999));
         setEstaAtiva(true);
@@ -56,14 +58,19 @@ public abstract class Conta {
         this.transacoes = new ArrayList<>();
         setIsContaConjunta(true);
     }
-    void criacaoConta(Cliente cliente1, Cliente cliente2, AgenciaBancaria agencia, String senha, int tipoTitularidadeConta){
-        if(tipoTitularidadeConta == 1){
-            criacaoContaSolo(cliente1, agencia, senha);
-        }else if(tipoTitularidadeConta == 2){
-            criacaoContaConjunta(cliente1, cliente2, agencia, senha);
-        }else{
-            throw new IllegalArgumentException("Erro ao escolher titularidade da conta");
+
+    public void imprimirDados() {
+        System.out.println("Conta Número: " + this.nroConta);
+        System.out.println("Status da Conta: " + (this.estaAtiva ? "Ativa" : "Inativa"));
+        System.out.println("Saldo: " + this.saldo);
+        System.out.println("Data de Abertura: " + this.dataDeAbertura);
+        System.out.println("Última Movimentação: " + this.dataUltimaMovimentacao);
+        System.out.println("Conta Conjunta: " + (this.isContaConjunta ? "Sim" : "Não"));
+        System.out.print("Titulares: ");
+        for (Cliente titular : this.titulares) {
+            System.out.print(titular.getNome() + " ");
         }
+        System.out.println();
     }
 
     public void sacar(double valor, String senha) throws SaldoInsuficienteException {
@@ -157,17 +164,24 @@ public abstract class Conta {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
     public boolean getIsContaConjunta(){
         return this.isContaConjunta;
     }
+
     public void setIsContaConjunta(boolean isContaConjunta) {
         this.isContaConjunta = isContaConjunta;
     }
+
     public String getSenha() {
         return senha;
     }
+
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    public List<Cliente> getTitulares() {
+        return titulares;
     }
 
 }

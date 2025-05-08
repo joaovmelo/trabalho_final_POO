@@ -1,8 +1,7 @@
 public interface interfaceDeUsuario {
-    void cadastrarClientes();
-    void operacoesBancarias();
-    void encerrarConta();
-    void encerrarSessao();
-    void escolhaBanco();
     void menu();
+    void cadastraClientes();
+    void aberturaDeConta();
+    void encerramentoDeConta();
+    void login();
 }

@@ -10,8 +10,9 @@ public class Main{
         Gerente gerenteSantanderSP = new Gerente("44494220663", 4586947, "Marco Montes de Santana", enderecoGerenteAgencia2, "Casado", "Ensino Superior Completo", "21/09/1885", "M", 37485, 10000, 2009, agencia2);
         agencia1.setGerente(gerenteSantanderMG_UDI);
         agencia2.setGerente(gerenteSantanderSP);
-        Cliente cliente = new Cliente();
-        Cliente clientes = cliente.cadastraCliente();
-        //System.out.println(cliente.toString(clientes, clientes.getEndereco()));
+
+
+        MenuDeUsuario menu = new MenuDeUsuario(agencia1, agencia2);
+        menu.menu();
     }
 }
