@@ -35,9 +35,8 @@ public abstract class Pessoa {
             throw new IllegalArgumentException("CPF não existe");
         }
     }
-    public Pessoa(){
-
-    }
+    public Pessoa(){}
+    
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }

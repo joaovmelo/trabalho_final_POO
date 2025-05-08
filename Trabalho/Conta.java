@@ -14,6 +14,7 @@ public abstract class Conta implements Imprimivel{
     private double saldo;
     private String senha;
     private boolean isContaConjunta;
+    private String nomeTipoConta;
     private List<Transacao> transacoes = new ArrayList<>();
     private List<Cliente> titulares = new ArrayList<>();
 
@@ -59,6 +60,12 @@ public abstract class Conta implements Imprimivel{
         setIsContaConjunta(true);
     }
 
+    public void encerrarConta(){
+        setEstaAtiva(false);
+        System.out.println("Conta encerrada com sucesso!");
+    }
+
+    @Override
     public void imprimirDados() {
         System.out.println("Conta Número: " + this.nroConta);
         System.out.println("Status da Conta: " + (this.estaAtiva ? "Ativa" : "Inativa"));
@@ -72,6 +79,8 @@ public abstract class Conta implements Imprimivel{
         }
         System.out.println();
     }
+
+    
 
     public void sacar(double valor, String senha) throws SaldoInsuficienteException {
         if (!autenticar(senha)) throw new IllegalArgumentException("Senha inválida");
@@ -182,6 +191,12 @@ public abstract class Conta implements Imprimivel{
     }
     public List<Cliente> getTitulares() {
         return titulares;
+    }
+    public void setNomeTipoConta(String nomeTipoConta) {
+        this.nomeTipoConta = nomeTipoConta;
+    }
+    public String getNomeTipoConta() {
+        return nomeTipoConta;
     }
 
 }

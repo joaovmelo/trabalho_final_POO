@@ -18,6 +18,8 @@ public class Transacao {
         this.canal = canal;
     }
 
+    public Transacao(){}
+
     public Conta getConta() {
         return conta;
     }

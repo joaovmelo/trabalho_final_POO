@@ -1,5 +1,5 @@
 import java.util.Date;
-//revisar essa classe
+
 public class Gerente extends Funcionario {
     private static double comissaoPorAgencia = 1000.0;
     private Date dataIngressoGerente;

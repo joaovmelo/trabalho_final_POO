@@ -18,9 +18,16 @@ public class Cliente extends Pessoa implements Imprimivel{
         super();
         this.contas = new ArrayList<>();
     }
-    public void setContas(List<Conta> contas) {
-        this.contas = contas;
+
+    public Cliente(String nome, String cpf){
+        setNome(nome);
+        setCpf(cpf);
     }
+
+    public void adicionarConta(Conta conta) {
+        contas.add(conta);
+    }
+
     public List<Conta> getContas() {
         return contas;
     }
@@ -38,4 +45,5 @@ public class Cliente extends Pessoa implements Imprimivel{
     public void imprimirDados() {
         System.out.println(this.toString());
     }
+    
 }

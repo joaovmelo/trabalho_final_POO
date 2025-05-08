@@ -48,26 +48,35 @@ public class ClienteService {
         switch (tipoConta) {
             case 1:
                 conta = new ContaCorrente();
+                conta.setNomeTipoConta("Conta corrente");
                 break;
             case 2:
                 conta = new ContaPoupanca();
+                conta.setNomeTipoConta("Conta poupança");
                 break;
             case 3:
                 conta = new ContaSalario();
+                conta.setNomeTipoConta("Conta salário");
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de conta inválido.");
         }
         if (isConjunta) {
             conta.criacaoContaConjunta(titulares, agencia, senha);
+            for (Cliente titular : titulares) {
+                titular.adicionarConta(conta);
+            }
         } else {
             conta.criacaoContaSolo(titulares, agencia, senha);
+            for (Cliente titular : titulares) {
+                titular.adicionarConta(conta);
+            }
         }
         return conta;
-}
+    }
 
     private boolean validarDataNascimento(String dataNascimento) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
             LocalDate.parse(dataNascimento, formatter);
             return true; 
@@ -76,4 +85,49 @@ public class ClienteService {
         }
     }
 
+    public int lerInt(Scanner sc, String mensagem) {
+        int valor = 0;
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            System.out.print(mensagem);
+            try {
+                valor = Integer.parseInt(sc.nextLine().trim());
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Digite apenas números inteiros.");
+            }
+        }
+        return valor;
+    }
+
+    public String lerString(Scanner sc, String mensagem) {
+        String entrada = "";
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            System.out.print(mensagem);
+            entrada = sc.nextLine().trim();
+            if (entrada.matches("[a-zA-ZÀ-ÿ ]+")) { // letras com acento e espaços
+                entradaValida = true;
+            } else {
+                System.out.println("Entrada inválida. Digite apenas letras.");
+            }
+        }
+        return entrada;
+    }
+    
+    public Double lerDouble(Scanner sc, String mensagem) {
+        double valor = 0;
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            System.out.print(mensagem);
+            String entrada = sc.nextLine().trim().replace(",", "."); 
+            try {
+                valor = Double.parseDouble(entrada);
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida! Digite apenas números válidos");
+            }
+        }
+        return valor;
+    }
 }
